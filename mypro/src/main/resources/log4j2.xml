@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--设置log4j2的自身log级别为warn-->
+<configuration status="error">
+<!-- 定义输出源 -->
+    <appenders>
+        <console name="Console" target="SYSTEM_OUT">
+           <!-- <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/> --> 
+           <PatternLayout pattern="%d [%-5level][%t] %m (%C:%F:%L) %n"/>
+        </console>
+        <!-- append="false" 每次重启重新来 可以用作测试环境 -->
+        
+        <File name="file" fileName="logs/all.log" append="false">
+             <PatternLayout pattern="%d [%-5level][%t] %m (%C:%F:%L) %n"/>
+        </File>
+        
+        <RollingFile name="rollingFile" fileName="logs/info.log"
+                     filePattern="logs/$${date:MM-dd}/%d{yyyy-MM-dd}-%i.zip"><!-- 自动压缩 -->
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max = "2"/><!-- 配置最大有几个文件 -->
+        </RollingFile>
+        
+         <RollingFile name="yaspeedRollingFile" fileName="logs/yaspeed.log"
+                     filePattern="logs/$${date:MM-dd}/%d{yyyy-MM-dd}-%i.zip"><!-- 自动压缩 -->
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <ThreadholdFilter level = "error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max = "2"/><!-- 配置最大有多少个文件 -->
+        </RollingFile>
+
+    </appenders>
+<!-- 具体的日志配置  基于name -->
+    <loggers>
+        <logger name="com.yaspeed" level="debug">
+                 <appender-ref ref="Console"/>
+                <appender-ref ref="yaspeedRollingFile"/>
+        </logger>
+        <logger name="cn.afterturn" level="debug">
+                <appender-ref ref="Console"/>
+                <appender-ref ref="yaspeedRollingFile"/>
+        </logger>
+        <logger name="org.springframework" level="INFO">
+           <appender-ref ref="Console"/>
+           <appender-ref ref="rollingFile"/>
+        </logger>
+        <!-- 日志异步输出 -->
+        <AsyncRoot level = "debug" includeLocation="true">
+             <appender-ref ref="Console"/>
+             <appender-ref ref="file"/>
+             <appender-ref ref="rollingFile"/>
+        </AsyncRoot>
+    </loggers>
+</configuration>

@@ -1,0 +1,111 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>登陆</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/images/jiangxi.ico"/>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/ace.min.css"/>
+    <link rel="stylesheet" href="/css/login.css"/>
+
+    <style>
+        .login-layout .widget-box {
+
+            height: 400px;
+        }
+    </style>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function login() {
+            $("#usernameValid").attr("style", "display:none;color:red");
+            $("#passwordValid").attr("style", "display:none;color:red");
+            if (formLogin.username.value == "") {
+                $("#usernameValid").attr("style", "color:red");
+                return;
+            }
+            if (formLogin.password.value == "") {
+                $("#passwordValid").attr("style", "color:red");
+                return;
+            }
+            formLogin.submit();
+        }
+
+        $(function () {
+            document.onkeydown = function (e) {
+                if (e.keyCode == 13) {
+                    login();
+                }
+            }
+        })
+        function clickJcaptcha() {
+            $(".jcaptcha-img").attr("src", '/getImages?' + new Date().getTime());
+        }
+    </script>
+</head>
+<body class="login-layout Reg_log_style" onload="clickJcaptcha()">
+<div class="logintop">
+    <img src="/images/images/login2.jpg"/> <img src="/images/images/okok2.png" align="middle"/>
+</div>
+<div class="loginbody">
+    <div class="login-container">
+        <div class="center"></div>
+        <div class="space-6"></div>
+        <div id="login-box" class="login-box widget-box no-border visible">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <img src="/images/images/baifu.png"/>
+                    <h2 class="header blue lighter bigger"></h2>
+                    <div class="login_icon">
+                        <img src="/images/images/login.png"/>
+                    </div>
+                    <form id="formLogin" name="formLogin" action="/login" method="post">
+                        <fieldset>
+                            <ul>
+                                <li id="usernameValid" style="display:none">请输入用户名</li>
+                                <li class="frame_style form_error"><label
+                                        class="user_icon"></label><input type="text"
+                                                                         name="username" placeholder="用户名"
+                                                                         th:value="${username}" value=""/></li>
+                                <li id="passwordValid" style="display:none">请输入密码</li>
+                                <li class="frame_style form_error"><label
+                                        class="password_icon"></label><input
+                                        type="password" name="password" placeholder="密码" th:value="${password}"/></li>
+                                <li style="color:#FF2F2F" th:if="${null !=message || '' != message}" th:text="${message}"></li>
+                            </ul>
+                            验证码：<input type="text" name="randomcode" style="width:110px">
+                            <img onclick="clickJcaptcha()" class="jcaptcha-btn jcaptcha-img"
+                                 title="点击更换验证码">
+                            <a onclick="clickJcaptcha()" class="jcaptcha-btn" href="javascript:void(0);">换一张</a>
+                            <div class="space"></div>
+                            <div class="clearfix">
+                                <button type="button" class="width-35 pull-m btn btn-sm btn-primary" onclick="login()">
+                                    <i class="icon-key" align="middle"></i> 登录
+                                </button>
+                            </div>
+                            <div class="space-4"></div>
+                        </fieldset>
+                    </form>
+                    <div class="social-or-login center">
+                        <span class="bigger-110">提示</span>
+                    </div>
+                    <div class="social-login center">本系统不支持IE9以下浏览器支持，请见谅。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loginbm">版权所有 2018 江西省农商银行</div>
+<strong></strong>
+<div id="particles-js"></div>
+<div class="container-fluid">
+    <div class="row cb-slideshow-text-container ">
+        <div class="tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/js/particles.js"></script>
+<script type="text/javascript" src="/js/app.js"></script>

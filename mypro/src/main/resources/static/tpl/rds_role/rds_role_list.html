@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:replace="common/tag::tag"/>
+<body>
+<!-- 页面顶部¨ -->
+<div th:replace="common/head::head"/>
+<div id="cl-wrapper" class="fixed-menu">
+    <!-- 中间内容 start -->
+    <div class="container-fluid" id="pcont">
+        <div class="page-breadcrumbs">
+            <ul class="breadcrumb">
+                <li><i class="iconfont">&#xe63a;</i> <a href="#">系统管理</a></li>
+                <li class="active">角色管理</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-primary">
+                <div class="panel-heading">查询条件</div>
+                <div class="panel-body">
+                    <form name="searchForm" id="searchForm" method="post"
+                          class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">角色名称 :</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="roleName" placeholder="请输入角色名称">
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-primary"
+                                        onclick="search()"><span class="glyphicon glyphicon-search"
+                                                                 aria-hidden="true"></span>查询
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-default"
+                                        onclick="resetForm()"><span class="glyphicon glyphicon-refresh"
+                                                                    aria-hidden="true"></span>重置
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div id="toolbar" class="col-bm-10 col-top-10 col-left-10">
+                    <button id="btn_add" type="button" class="btn btn-warning"
+                            onclick="toAddRdsRole()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                    </button>
+                    <button id="btn_edit" type="button" class="btn btn-success"
+                            onclick="toUpdateRdsRole()">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>修改
+                    </button>
+                    <button id="btn_delete" type="button" class="btn btn-danger"
+                            onclick="deleteRoleByRoleIds()">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>删除
+                    </button>
+                </div>
+            </div>
+            <table id="rds_role">
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="/tpl/rds_role/rds_role_list.js"></script>

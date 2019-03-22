@@ -1,0 +1,32 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<form name="addRoleForm" id="addRoleForm" method="post" class="form-horizontal">
+<input type="hidden" name="userId" th:value="${userId}">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h4 class="modal-title">分配角色</h4>
+	</div>
+	<div class="modal-body">
+		<div class="panel-body wrapper-sm">
+			<div class="col-xs-offset-4">
+						<div class="col-sm-25 col-top-8" th:each="rdsRole : ${rdsRoleList}">
+							<label class="el-switch"><input type="checkbox"
+								name="roleIds" th:value="${rdsRole.roleId}" th:checked="${hRoleListMap[rdsRole.roleId]}">
+								    <span class="el-switch-style">&nbsp;开&nbsp;关</span></label>
+							    <lable style="font-size: 14px;font-family: '宋体';" th:text="${rdsRole.roleName}"></lable>
+							&nbsp;&nbsp;
+						</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="col-sm-25 m-b text-center">
+		    <button type="button" class="btn btn-primary ng-scope"
+				onclick="addRdsRole()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> 保存</button>
+			<button class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+		</div> 
+	</div>
+</form>
+<script src="/tpl/rds_user/rds_user_role.js"></script>

@@ -1,0 +1,54 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<form name="addForm" id="addForm" method="post" class="form-horizontal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h4 class="modal-title">增加角色</h4>
+	</div>
+	<div class="modal-body">
+		<div class="panel-body wrapper-sm">
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">角色代码</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+					<input type="text" name="roleId" placeholder="请输入角色代码"
+						class="form-control m-b-xs">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">名称</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+					<input type="text" name="roleName" placeholder="请输入角色名称"
+						class="form-control m-b-xs">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">描述</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+				  <textarea class="form-control" style="height: 86px; width: 264px;" name="roleDesc" placeholder="请输入角色描述"></textarea>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">菜单权限</b>:</label>
+				<div class="col-sm-10 treeflow">
+						<ul id="zTree" class="ztree"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="modal-footer">
+		<div class="col-sm-25 m-b text-center">
+		     <button type="button" class="btn btn-primary ng-scope"
+				onclick="addRdsRole()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>保存</button>
+			<button class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+			
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="/tpl/rds_role/rds_role_add.js"></script>

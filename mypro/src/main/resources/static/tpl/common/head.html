@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<!--  Fixed navbar -->
+<div id="head-nav" class="navbar navbar-default navbar-fixed-top" th:fragment="head">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="fa fa-gear"></span>
+            </button>
+            <a class="navbar-brand" href="#"><span>后台管理管理系统</span></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown" th:each="menus:${activeUser.menus}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:inline="text">[[${menus.name}]]<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li th:each="childrenMenus:${menus.children }">
+                            <a th:href="${childrenMenus.url}+'?menuId='+${childrenMenus.type}+${childrenMenus.id}"
+                               th:text="${childrenMenus.name}">
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right user-nav">
+                <li class="dropdown profile_menu">
+                    <a href="#"
+                       class="dropdown-toggle" data-toggle="dropdown"><img style="border-radius:25px"
+                                                                           alt="Avatar" src="/images/user.png"/><span
+                            th:text="${activeUser.username}"></span><b
+                            class="caret"></b> <span style="display: none" th:text="${activeUser.userId}"></span>
+                        <span style="display: none">启用</span> <span style="display: none"
+                                                                    th:text="${activeUser.id}"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- 	<li><a   style="cursor:pointer;" id="showOrEditUserInfo">
+                          <i class="iconfont icon-person"></i>&nbsp;柜员信息</a></li>-->
+                        <li id="systemset"><a style="cursor: pointer;"
+                                              onclick="toModifyPsw()"> <i class="iconfont icon-0702shezhi"></i>&nbsp;修改密码
+                        </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout" id="btnlogout"><i
+                                class="iconfont icon-log-out"></i>&nbsp;退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!--
+           <ul class="nav navbar-nav navbar-right not-nav" >
+             <li class="button dropdown">
+               <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="iconfont">&#xe60f;</i><span class="bubble">2</span></a>
+               <ul class="dropdown-menu messages">
+                 <li>
+                   <div class="nano nscroller">
+                     <div class="content">
+                        <ul>
+                         <li><a href="#"><i class="fa fa-cloud-upload info"></i>快贷申请流程异常 <span class="date">2 minutes ago.</span></a></li>
+                         <li><a href="#"><i class="fa fa-male success"></i>快贷申请流程异常  <span class="date">15 minutes ago.</span></a></li>
+                        </ul>
+                     </div>
+
+                   </div>
+                   <ul class="foot"><li><a href="#">View all messages </a></li></ul>
+                 </li>
+               </ul>
+             </li>
+             <li class="button dropdown">
+               <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="iconfont">&#xe7a8;</i><span class="bubble">2</span></a>
+               <ul class="dropdown-menu">
+                 <li>
+                   <div class="nano nscroller">
+                     <div class="content">
+                       <ul>
+                         <li><a href="#"><i class="fa fa-cloud-upload info"></i>网站更新功能通知 <span class="date">2 minutes ago.</span></a></li>
+                         <li><a href="#"><i class="fa fa-male success"></i> 关于XXX功能的正确操作 <span class="date">15 minutes ago.</span></a></li>
+                        </ul>
+                     </div>
+                   </div>
+                   <ul class="foot"><li><a href="#">查看所有消息 </a></li></ul>
+                 </li>
+               </ul>
+             </li>
+           </ul>
+       -->
+        </div><!--/.nav-collapse animate-collapse -->
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+        $(function () {
+            var userId = [[${activeUser.userId}]];
+            var username = [[${activeUser.username}]];
+            var html = '<div class="active text-right" style="float: right">当前登陆 : ' + userId + ' ' + username + '</div>';
+            $(".breadcrumb").append(html);
+        });
+        function toModifyPsw() {
+            Modal({url: '/sys_user/toModifyPsw?tellerId=${activeUser.userId}'});
+        }
+    </script>
+</div>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head th:replace="common/tag::tag"/>
+<body>
+<!-- 页面顶部¨ -->
+<div th:replace="common/head::head"/>
+	<div id="cl-wrapper" class="fixed-menu">
+		<!-- 中间内容 start -->
+		<div class="container-fluid" id="pcont" name="context">
+			<div class="page-breadcrumbs" id="navigation">
+				<ul class="breadcrumb">
+					<li><i class="iconfont">&#xe63a;</i> <a href="#">系统管理</a></li>
+					<li class="active">柜员管理</li>
+				</ul>
+			</div>
+			<div class="panel-body">
+				<div class="panel panel-primary">
+					<div class="panel-heading"><lable class="lable-default">查询条件</lable></div>
+					<div class="panel-body">
+						<form name="searchForm" id="searchForm" method="post"
+							class="form-horizontal">
+							<input type="hidden" name="unitId" id="unitId" value="${activeUser.userId}" />
+								<input type="hidden" name="token" id="token" value="${token }" />
+							<div class="form-group row">
+								<label class="control-label col-sm-3">柜员号 :</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" name="tellerId"
+										placeholder="请输入柜员号" maxlength="6">
+								</div>
+								<label class="control-label col-sm-3">柜员姓名 :</label>
+								<div class="col-sm-5">
+									<input type="text" class="form-control" name="tellerName"
+										placeholder="请输入柜员姓名">
+								</div>
+								<div class="col-sm-6">
+									<button type="button" id="btn_query" class="btn btn-primary"
+										onclick="search()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 查询</button>
+									<button type="button" class="btn btn-default col-xs-offset-1"
+										onclick="resetForm()"> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 重置</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div id="toolbar" class="col-bm-10 col-top-10 col-left-10">
+							<button type="button" class="btn btn-primary"
+								onclick="toDetailRdsUserByTellerId()">
+								<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+								查看
+							</button>
+							<button type="button" class="btn btn-success"
+								onclick="setRdsRoleById()">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+								角色分配
+							</button>
+							<button type="button" class="btn btn-danger"
+								onclick="updatePasswordById()">
+								<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+								重置密码
+							</button>
+					</div>
+				</div>
+				<table id="rds_user">
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="/tpl/rds_user/rds_user_list.js"></script>

@@ -1,0 +1,9 @@
+salt : uiwueylm
+hashIterations : 2
+
+#端口
+server:
+  port: 8080
+  servlet:
+    context-path: /
+

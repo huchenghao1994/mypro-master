@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaspeed.web.dao.RdsUserMenuMapper" >
+   <select id="findMenusListByUserId" parameterType="String" resultType="com.yaspeed.web.pojo.RdsMenu">
+      select id as id,menu_id as menuId,url as url,pid as pid,menu_name as menuName,menu_type as menuType,order_num as orderNum,percode as percode,icon as icon from rds_menu  where menu_id in(select menu_id from   rds_role_menu where role_id=(select role_id from rds_user_role where user_id=#{userId,jdbcType=CHAR})) order by order_num
+   </select>
+</mapper>

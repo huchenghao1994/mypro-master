@@ -1,0 +1,108 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<form name="updateForm" id="updateForm" method="post" class="form-horizontal">
+	<input type="hidden" name="pid" th:value="${rdsMenu.pid}">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-hidden="true">&times;</button>
+		<h4 class="modal-title">修改资源</h4>
+	</div>
+	<div class="modal-body">
+		<div class="panel-body wrapper-sm">
+		<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">资源代码</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+					<input type="text" name="menuId" placeholder="请输入角色代码"
+						class="form-control m-b-xs" th:value="${rdsMenu.menuId}" readonly>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">资源名称</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+					<input type="text" name="menuName"  placeholder="请输入角色名称"
+						class="form-control m-b-xs" th:value="${rdsMenu.menuName}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">类型</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+					<select class="form-control m-b-xs" name="menuType" onchange="selectType(this)">
+						<option value="module" th:selected="${rdsMenu.menuType=='module'}">模块</option>
+						<option value="page"   th:selected="${rdsMenu.menuType=='page'}">页面</option>
+						<option value="button" th:selected="${rdsMenu.menuType=='button'}">按钮</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row" id="divUrl"  th:style="'display:'+${rdsMenu.menuType!='page'?'none':''}">
+				<label class="col-sm-6 control-label text-right">
+                    <b class="form-text-black">路径</b><b class="form-error"></b>:</label>
+				<div class="col-sm-10">
+					<input type="text" name="url" id="url" placeholder="请输入路径"
+						class="form-control m-b-xs" th:value="${rdsMenu.url}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">权限代码</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+					<input type="text" name="percode" placeholder="请输入路径"
+						class="form-control m-b-xs" th:value="${rdsMenu.percode}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">排序</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+					<input type="text" name="orderNum" placeholder="请输入排序"
+						class="form-control m-b-xs" th:value="${rdsMenu.orderNum}">
+				</div>
+			</div>
+				<!--<div class="form-group row">
+				<label class="col-sm-6 control-label text-right"><b
+					class="form-text-black">图标</b><b class="form-error">*</b>:</label>
+				<div class="col-sm-10">
+						<input name="icon" id="icon" type="hidden" value="${rdsMenu.icon}" />
+					<button type="button" class="btn dropdown-toggle"
+						id="dropdownMenu" data-toggle="dropdown">
+					<i class="iconfont" id="Vicon"><c:if test="${rdsMenu.icon==''||rdsMenu.icon==null}">选择</c:if>${rdsMenu.icon}</i> <span class="caret"></span>
+					</button>
+					
+					<ul  class="dropdown-menu pull-right" role="menu"
+						aria-labelledby="dropdownMenu"  style="height:200px;overflow:auto;">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe645;');$('#Vicon').html('&#xe645;')"><i class="iconfont">&#xe645;</i></a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe6ab;');$('#Vicon').html('&#xe6ab;')"><i class="iconfont">&#xe6ab;</i></a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe636;');$('#Vicon').html('&#xe636;')"><i class="iconfont">&#xe636;</i></a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe6ec;');$('#Vicon').html('&#xe6ec;')"><i class="iconfont">&#xe6ec;</i></a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe767;');$('#Vicon').html('&#xe767;')"><i class="iconfont">&#xe767;</i></a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe600;');$('#Vicon').html('&#xe600;')"><i class="iconfont">&#xe600;</i></a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe601;');$('#Vicon').html('&#xe601;')"><i class="iconfont">&#xe601;</i></a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							onclick="$('#icon').val('&#xe605;');$('#Vicon').html('&#xe605;')"><i class="iconfont">&#xe605;</i></a></li>
+					</ul>
+				</div>-->
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+	<div class="col-sm-25 m-b text-center">
+			<button type="button" class="btn btn-primary" onclick="updateRdsMenu()">
+				<span class="glyphicon glyphicon-save" aria-hidden="true"></span>保存
+			</button>
+			<button class="btn btn-default" data-dismiss="modal">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+			</button>
+		</div>
+	</div>
+</form>
+</html>
+<script type="text/javascript" src="/tpl/rds_menu/rds_menu_update.js"></script>
